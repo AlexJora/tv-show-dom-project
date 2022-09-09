@@ -1,3 +1,22 @@
 #root {
-  color: red;
+  color: black;
+  background-color: whitesmoke;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
 }
+
+.episodeItem {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  max-width: 30%;
+}
+
+.nameSeasonNumber {}
+
+.episodeItem .content img {}
+
+.episodeItem .content p {}
