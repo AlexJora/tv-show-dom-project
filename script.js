@@ -78,7 +78,7 @@ function createSection() {
   rootElem.appendChild(section);
   return section;
 }
-//Your page should state somewhere that the data has (originally) come from TVMaze.com, and link back to that site (or the specific episode on that site). See tvmaze.com/api#licensing.
+//tvmaze
 
 function createMazeDiv() {
   const header = document.querySelector(".header");
@@ -235,7 +235,7 @@ function makePageForEpisodes(episodeList) {
   select.addEventListener("change", (e) => {
     console.log(e.target.value);
     let episodeId = e.target.value;
-    const popUp = createPopUp(episodeId); // create popup for episode with id=4952
+    const popUp = createPopUp(episodeId);
     rootElem.appendChild(popUp);
   });
 
