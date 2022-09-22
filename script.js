@@ -151,17 +151,7 @@ function makePageForEpisodes(episodeList) {
   //display header
   createHeader();
   let header = document.querySelector('.header');
-  //display select
-  createSelect();
-  let select = document.querySelector('select')
-  // create the options for the select:
-  for (const episodeData of episodeList) {
-    let option = document.createElement('option')
-    option.className = 'selectOption';
-    option.value = episodeData.id;
-    option.innerText = ` ${padSeasonAndEpisode(episodeData)} - ${episodeData.name}`
-    select.appendChild(option);
-  }
+
   //display search bar
   let searchBar = createSearchBar();
   header.appendChild(searchBar);
@@ -177,25 +167,79 @@ function makePageForEpisodes(episodeList) {
   createMazeDiv();
   let maze = document.querySelector('.mazeDiv');
 
-  // we grab the input and the span:
+  // input and the span:
   let input = document.querySelector('input.search');
   let span = document.querySelector('span.searchOutput');
-
-  // add the popup
-  // the popup will show the chosen episode.
-  const rootElem = document.querySelector('#root');
-  // when selected value changes, a popup with the episode will open
-  select.addEventListener(
-    'change',
+  // add event handler for input change
+  input.addEventListener(
+    'input',
     (e) => {
+      // first remove from the DOM all divs of class .episodeItem
+      let episodeDivs = document.getElementsByClassName('episodeItem');
+      let parentOfEpisodes = document.querySelector('.section')
+      //how long are episodes
+      while (episodeDivs.length > 0) {
+        let episodeDiv = episodeDivs[0];
+        parentOfEpisodes.removeChild(episodeDiv)
+      }
       console.log(e.target.value)
-      let episodeId = e.target.value
-      const popUp = createPopUp(episodeId); // create popup for episode with id=4952
-      rootElem.appendChild(popUp);
-    }
-  )
 
-}
+      // the query is empty, we should use al movies
+      let query = e.target.value.toLowerCase();
+      let filteredEpisodeList;
+      if (query.length == 0) {
+        // use all movies
+        filteredEpisodeList = [...episodeList]
+      } else {
+        filteredEpisodeList = episodeList
+          .filter(episode => {
+            let episodeName = episode.name.toLowerCase();
+            let episodeSummary = episode.summary.toLowerCase();
+
+            if (episodeName.includes(query) ||
+              episodeSummary.includes(query)) {
+              return true;
+            }
+            else {
+              return false;
+            }
+          })
+      }
+      // 1st effect: show the filtered episoded
+      for (const episodeData of filteredEpisodeList) {
+        let episodeElem = createEpisodeElement(episodeData);
+        section.appendChild(episodeElem);
+      }
+      // 2nd effect: displaying how many episodes the site is showing
+      let searchOutputSpan = document.querySelector('.searchOutput');
+      searchOutputSpan.innerText = `Displaying ${filteredEpisodeList.length}/73`
+
+      //display select
+      createSelect();
+      let select = document.querySelector('select')
+      // create the options for the select:
+      for (const episodeData of episodeList) {
+        let option = document.createElement('option')
+        option.className = 'selectOption';
+        option.value = episodeData.id;
+        option.innerText = ` ${padSeasonAndEpisode(episodeData)} - ${episodeData.name}`
+        select.appendChild(option);
+      }
+
+      // the popup will show the chosen episode.
+      const rootElem = document.querySelector('#root');
+      // when selected value changes, a popup with the episode will open
+      select.addEventListener(
+        'change',
+        (e) => {
+          console.log(e.target.value)
+          let episodeId = e.target.value
+          const popUp = createPopUp(episodeId); // create popup for episode with id=4952
+          rootElem.appendChild(popUp);
+        }
+      )
+
+    }
 
 window.onload = setup;
 
