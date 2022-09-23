@@ -5,7 +5,7 @@ function getAllEpisodesFromAPI() {
     .then((req) => req.json())
     .then((data) => {
       episodes = data; // store the data in the global variable
-      // console.log(data);
+
       makePageForEpisodes(episodes); // make the page
     });
 }
@@ -104,7 +104,7 @@ function createSelect() {
   let select = document.createElement("select");
   select.className = "select";
   header.appendChild(select);
-  console.log(header);
+  // console.log(header);
 }
 
 // write a function which creates a popup episode
@@ -181,7 +181,7 @@ function makePageForEpisodes(episodeList) {
       let episodeDiv = episodeDivs[0];
       parentOfEpisodes.removeChild(episodeDiv);
     }
-    console.log(e.target.value);
+    // console.log(e.target.value);
 
     // the query is empty, we should use al movies
     let query = e.target.value.toLowerCase();
@@ -215,7 +215,7 @@ function makePageForEpisodes(episodeList) {
   // display select
   createSelect();
   let select = document.querySelector(".select");
-  console.log(select);
+
 
   // create the options for the select:
   for (const episodeData of episodeList) {
@@ -233,7 +233,7 @@ function makePageForEpisodes(episodeList) {
   const rootElem = document.querySelector("#root");
   // when selected value changes, a popup with the episode will open
   select.addEventListener("change", (e) => {
-    console.log(e.target.value);
+
     let episodeId = e.target.value;
     const popUp = createPopUp(episodeId);
     rootElem.appendChild(popUp);
