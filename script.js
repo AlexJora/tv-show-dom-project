@@ -56,7 +56,6 @@ function createEpisodeElement(episodeData) {
     ${episodeData.summary}
   </div>
   `;
-
   return episode;
 }
 //show element
@@ -80,8 +79,6 @@ function createShowElement(showData) {
   </ul>
 
   `;
-
-
   return show;
 
 }
@@ -130,7 +127,7 @@ function createPopUp(episodeId) {
   popUp.id = "popupEpisode";
   popUp.className = "episodeItem";
 
-  // 1. find the episode with this id
+  //find the episode with this id
   const allEpisodes = episodes;
   console.log(episodeId, allEpisodes);
   const episodeData = allEpisodes.find((episode) => episode.id === episodeId);
@@ -206,7 +203,7 @@ function makePageLayout() {
   rootElem.appendChild(header);
   //section
   let section = createSection();
-  // // section will contain episodes, so it is hidden at the beginning
+  // section will contain episodes, so it is hidden at the beginning
   // section.style.display = 'none';
   rootElem.appendChild(section);
 
@@ -214,11 +211,8 @@ function makePageLayout() {
   let input = document.querySelector("input.search");
   // add event handler for input change
   input.addEventListener("input", onInputSearch);
-
-
-
   let selectE = document.querySelector(".select");
-  // selectE.style.display = 'none';
+
   // the popup will show the chosen episode.
   // when selected value changes, a popup with the episode will open
   selectE.addEventListener("change", (e) => {
@@ -308,7 +302,7 @@ function makeShowView(showList) {
 }
 
 
-// run once when loading the page. You must call this after calling makePageLayout()
+// run once when loading the page(after calling makePageLayout())
 function makeShowSelector(showList) {
   //show select
   let selectS = document.querySelector('.select2');
