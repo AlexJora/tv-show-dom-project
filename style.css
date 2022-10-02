@@ -50,8 +50,7 @@ form {
 .showView {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  row-gap: 0.5rem;
-  column-gap: 0.5rem;
+  row-gap: 2rem;
   text-align: center;
   padding: 2rem;
   margin: auto;
@@ -60,12 +59,12 @@ form {
 
 .showItem {
   width: 25rem;
-  height: 43rem;
+  height: 40rem;
   text-align: center;
   background-color: ;
   display: flex;
   flex-direction: column;
-  flex-wrap: ;
+  overflow: auto;
   background-color: #776885;
   font-size: 0.8rem;
 
@@ -117,7 +116,7 @@ form {
   color: #F7E2E2;
 }
 
-.searchOutput {
+#count {
   color: #F7E2E2;
   margin-left: 2rem;
 }

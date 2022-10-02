@@ -82,7 +82,6 @@ function createShowElement(showData) {
   return show;
 
 }
-
 //header
 function createHeader() {
   let header = document.createElement("div");
@@ -91,18 +90,19 @@ function createHeader() {
   // add select show
   // add select episode
   header.innerHTML = `
-  <button class='backButton'>  HOME  </button>
-  <form><input type ='search' class = 'search' placeholder = 'your search term...'/><span class = 'searchOutput'> <span>Displaying 73/73 episodes</span> 
-  </span></form>
+  <button class='backButton'> HOME </button>
+  <form><input type ='search' class = 'search' placeholder = 'SEARCH...'/><span id ='count'></span></form>
   <select class='select2' placeholder = 'Select show:'></select>
   <select class='select'  placeholder = 'Select episode:'></select>
   
 `
   let btn = header.querySelector('.backButton');
   btn.addEventListener('click', (e) => {
-
+    //hide episode selector
+    let selectE = document.querySelector(".select");
+    selectE.style.display = 'none';
     //home button
-    makeHome()
+    makeHomeBtn()
   })
 
   return header
@@ -121,13 +121,14 @@ function createSection() {
 
 //popup episode at selection
 let episodes = []; // global variable
+
 function createPopUp(episodeId) {
   episodeId = parseInt(episodeId)
   const popUp = document.createElement("div");
   popUp.id = "popupEpisode";
   popUp.className = "episodeItem";
 
-  //find the episode with this id
+  // 1. find the episode with this id
   const allEpisodes = episodes;
   console.log(episodeId, allEpisodes);
   const episodeData = allEpisodes.find((episode) => episode.id === episodeId);
@@ -154,47 +155,7 @@ function createPopUp(episodeId) {
 
   return popUp;
 }
-//search
-function onInputSearch(e) {
-  let episodeList = episodes; // copy from the global variable named episodes
-  // first remove from the DOM all divs of class .episodeItem
-  let episodeDivs = document.getElementsByClassName("episodeItem");
-  let parentOfEpisodes = document.querySelector(".section");
-  //how long are episodes
-  while (episodeDivs.length > 0) {
-    let episodeDiv = episodeDivs[0];
-    parentOfEpisodes.removeChild(episodeDiv);
-  }
-  // console.log(e.target.value);
 
-  // the query is empty, we should use al movies
-  let query = e.target.value.toLowerCase();
-  let filteredEpisodeList;
-  if (query.length === 0) {
-    // use all movies
-    filteredEpisodeList = [...episodeList];
-  } else {
-    filteredEpisodeList = episodeList.filter((episode) => {
-      let episodeName = episode.name.toLowerCase();
-      let episodeSummary = episode.summary.toLowerCase();
-
-      if (episodeName.includes(query) || episodeSummary.includes(query)) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-  }
-  // 1st effect: show the filtered episoded
-  let section = document.querySelector('.section')
-  for (const episodeData of filteredEpisodeList) {
-    let episodeElem = createEpisodeElement(episodeData);
-    section.appendChild(episodeElem);
-  }
-  // 2nd effect: displaying how many episodes the site is showing
-  let searchOutputSpan = document.querySelector(".searchOutput");
-  searchOutputSpan.innerText = `Displaying ${filteredEpisodeList.length}/73`;
-}
 
 function makePageLayout() {
   const rootElem = document.getElementById("root");
@@ -204,15 +165,10 @@ function makePageLayout() {
   //section
   let section = createSection();
   // section will contain episodes, so it is hidden at the beginning
-  // section.style.display = 'none';
+  section.style.display = 'none';
   rootElem.appendChild(section);
-
-  // input and the span:
-  let input = document.querySelector("input.search");
-  // add event handler for input change
-  input.addEventListener("input", onInputSearch);
   let selectE = document.querySelector(".select");
-
+  selectE.style.display = 'none';
   // the popup will show the chosen episode.
   // when selected value changes, a popup with the episode will open
   selectE.addEventListener("change", (e) => {
@@ -220,9 +176,11 @@ function makePageLayout() {
     const popUp = createPopUp(episodeId);
     rootElem.appendChild(popUp);
   });
+
+
 }
 
-function makeHome() {
+function makeHomeBtn() {
   let section = document.querySelector('.section')
   let showView = document.querySelector('.showView')
 
@@ -251,6 +209,28 @@ function hideShowView() {
 
 //to display page
 function makePageForEpisodes(episodeList) {
+  //search episodes
+  let counter = document.getElementById("count");
+  let input = document.querySelector(".search");
+  input.addEventListener("keyup", (event) => {
+
+    const searchString = event.target.value.toLowerCase();
+    const episodeDivs = document.querySelectorAll(".episodeItem");
+    let countEpisodes = 0;
+
+
+    // Checks if each div contains the search string and if not sets display to none
+    for (let i = 0; i < episodeDivs.length; i++) {
+      if (!episodeDivs[i].innerHTML.toLowerCase().includes(searchString)) {
+        episodeDivs[i].style.display = "none";
+      } else {
+        episodeDivs[i].style.display = "block";
+        countEpisodes++;
+      }
+    }
+    counter.innerText = `Displaying   ${countEpisodes}/72 episode's`;
+  });
+  //end of search episodes
   let section = document.querySelector('.section');
   //display episodes
   // remove old episodes
@@ -283,11 +263,36 @@ function makePageForEpisodes(episodeList) {
     option.innerText = ` ${pad(episodeData)} - ${episodeData.name
       }`;
     selectE.appendChild(option);
+    console.log(episodeList)
   }
 }
 
 //creates DIV containing show elements (showView)
 function makeShowView(showList) {
+  //search show
+  let span = document.getElementById("count");
+  let input = document.querySelector(".search");
+  input.addEventListener("keyup", (event) => {
+
+    const searchString = event.target.value.toLowerCase();
+    const showDivs = document.querySelectorAll(".showItem");
+    let countShows = 0;
+
+
+    // Checks if each card contains the search string and if not sets display to none
+    for (let i = 0; i < showDivs.length; i++) {
+      if (!showDivs[i].innerHTML.toLowerCase().includes(searchString)) {
+        showDivs[i].style.display = "none";
+      } else {
+        showDivs[i].style.display = "block";
+        countShows++;
+      }
+    }
+    span.innerText = `Displaying ${countShows}/301 show's`;
+
+  });
+
+  //end search
   let rootElem = document.querySelector('#root')
   let showView = document.createElement('div');
   showView.className = 'showView';
@@ -302,7 +307,7 @@ function makeShowView(showList) {
 }
 
 
-// run once when loading the page(after calling makePageLayout())
+// run once when loading the page. You must call this after calling makePageLayout()
 function makeShowSelector(showList) {
   //show select
   let selectS = document.querySelector('.select2');
@@ -313,6 +318,7 @@ function makeShowSelector(showList) {
   firstOption.textContent = `Select Show:`;
   firstOption.selected = true;
   firstOption.disabled = true;
+
 
   //option for select
   for (const showData of showList) {
@@ -325,6 +331,10 @@ function makeShowSelector(showList) {
   }
 
   selectS.addEventListener("change", (e) => {
+    //show episode selector
+    let selectE = document.querySelector(".select");
+    selectE.style.display = '';
+
     let showId = e.target.value;
     // fetch data from API
     fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
