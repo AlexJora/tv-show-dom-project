@@ -32,22 +32,21 @@
 
 form {
   width: 30rem;
-  height: 2rem;
+  height: 2.5rem;
 
 }
 
 .search {
   width: 15rem;
-  height: 2rem;
-  /* margin-left: 10rem;
-  margin-top: 1 rem; */
+  height: 2.5rem;
+  border-radius: 5px;
 }
 
 
 .section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  row-gap: 0.5rem;
+  row-gap: 2rem;
   column-gap: 0.5rem;
   text-align: center;
   padding: 2rem;
@@ -60,6 +59,7 @@ form {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 2rem;
+  column-gap: 2rem;
   text-align: center;
   padding: 2rem;
   margin: auto;
@@ -75,6 +75,7 @@ form {
   overflow: auto;
   background-color: #776885;
   font-size: 0.8rem;
+  border-radius: 5px;
 
 }
 
@@ -86,8 +87,8 @@ form {
   width: 18rem;
   height: 35rem;
   text-align: center;
-  background-color: #51A3A3;
-  border: 5px solid #474973;
+  background-color: #197278;
+  border: 5px solid #1A132F;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -134,10 +135,8 @@ form {
 .select,
 .select2 {
   width: 19.5rem;
-  height: 2rem;
-  /* margin-top: 1.8rem;
-  margin-left: 0.5rem; */
-
+  height: 2.5rem;
+  border-radius: 5px;
 }
 
 
@@ -153,7 +152,7 @@ form {
 
 .backButton {
   width: 5rem;
-  height: 2rem;
+  height: 2.5rem;
   font-weight: 500;
   border-radius: 5px;
   background-color: #E7CFCD;
