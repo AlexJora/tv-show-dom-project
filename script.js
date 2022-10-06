@@ -90,11 +90,13 @@ function createHeader() {
   // add select show
   // add select episode
   header.innerHTML = `
+  <h2 class= 'title'>TV SHOW PROJECT</h2>
+  <div class='container'>
   <button class='backButton'> HOME </button>
   <form><input type ='search' class = 'search' placeholder = 'SEARCH...'/><span id ='count'></span></form>
-  <select class='select2' placeholder = 'Select show:'></select>
-  <select class='select'  placeholder = 'Select episode:'></select>
-  
+  <select class='select2'><option value="" selected="selected" hidden="hidden">SELECT SHOW:</option></select>
+  <select class='select'><option value="" selected="selected" hidden="hidden">SELECT EPISODE:</option></select>
+  </div>
 `
   let btn = header.querySelector('.backButton');
   btn.addEventListener('click', (e) => {
@@ -246,11 +248,11 @@ function makePageForEpisodes(episodeList) {
   let selectE = document.querySelector(".select");
   let firstOption = document.createElement(`option`);
 
-  firstOption.setAttribute(`value`, `select an option`);
-  firstOption.innerText = `Select Episode:`;
-  firstOption.selected = true;
-  firstOption.disabled = true;
-  selectE.appendChild(firstOption);
+  // firstOption.setAttribute(`value`, `select an option`);
+  // firstOption.innerText = `Select Episode:`;
+  // firstOption.selected = true;
+  // firstOption.disabled = true;
+  // selectE.appendChild(firstOption);
 
   // create the options for the select:
   while (selectE.children.length > 0) {
@@ -311,13 +313,13 @@ function makeShowView(showList) {
 function makeShowSelector(showList) {
   //show select
   let selectS = document.querySelector('.select2');
-  let firstOption = document.createElement(`option`);
-  selectS.appendChild(firstOption);
-  firstOption.setAttribute(`id`, `firstShow`);
-  firstOption.setAttribute(`value`, `select an option`);
-  firstOption.textContent = `Select Show:`;
-  firstOption.selected = true;
-  firstOption.disabled = true;
+  // let firstOption = document.createElement(`option`);
+  // selectS.appendChild(firstOption);
+  // firstOption.setAttribute(`id`, `firstShow`);
+  // firstOption.setAttribute(`value`, `select an option`);
+  // firstOption.textContent = `Select Show:`;
+  // firstOption.selected = true;
+  // firstOption.disabled = true;
 
 
   //option for select

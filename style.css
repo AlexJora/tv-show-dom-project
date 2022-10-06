@@ -6,9 +6,20 @@
 }
 
 .header {
-  height: 5rem;
+  height: 12rem;
   background-color: #1A132F;
-  margin-top: rem;
+  color: #E7CFCD;
+  margin-top: -1.5rem;
+
+}
+
+.title {
+  text-align: center;
+  padding-top: 2rem;
+  letter-spacing: 0.3rem;
+}
+
+.container {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -16,9 +27,7 @@
   gap: 1rem;
   padding-bottom: 1rem;
   padding-left: 5px;
-
-
-
+  margin-top: 5rem;
 }
 
 form {
@@ -61,7 +70,6 @@ form {
   width: 25rem;
   height: 40rem;
   text-align: center;
-  background-color: ;
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -78,11 +86,12 @@ form {
   width: 18rem;
   height: 35rem;
   text-align: center;
-  background-color: #537D8D;
-  border: 5px solid #13545F;
+  background-color: #51A3A3;
+  border: 5px solid #474973;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 .episodeItem h2 {
@@ -119,6 +128,7 @@ form {
 #count {
   color: #F7E2E2;
   margin-left: 2rem;
+  font-weight: 400;
 }
 
 .select,
@@ -139,4 +149,13 @@ form {
   position: fixed;
   top: 0;
   left: 0;
+}
+
+.backButton {
+  width: 5rem;
+  height: 2rem;
+  font-weight: 500;
+  border-radius: 5px;
+  background-color: #E7CFCD;
+  margin-left: 1rem;
 }
